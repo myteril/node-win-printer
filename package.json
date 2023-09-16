@@ -1,0 +1,25 @@
+{
+  "name": "node-win-printer",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A small Node.js package to get the information of available printers on Windows.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myteril/node-win-printer.git"
+  },
+  "keywords": [
+    "node",
+    "windows",
+    "printer"
+  ],
+  "author": "Deniz Aktaş (myteril)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/myteril/node-win-printer/issues"
+  },
+  "homepage": "https://github.com/myteril/node-win-printer#readme"
+}

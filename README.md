@@ -17,8 +17,8 @@ yarn add @myteril/node-win-printer
 ### Usage
 
 ```javascript
-// To import the function, add the following line.
-import { getPrinters } from "@myteril/node-win-printer"
+// To import the function, use the following line.
+const { getPrinters } = require("@myteril/node-win-printer")
 
 // Call the function to get the array of printer information objects. 
 const printerInfoList = await getPrinters()

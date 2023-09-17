@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/myteril/node-win-printer/issues"
   },
-  "homepage": "https://github.com/myteril/node-win-printer#readme"
+  "homepage": "https://github.com/myteril/node-win-printer#readme",
+  "dependencies": {
+    "iconv-lite": "^0.6.3"
+  }
 }

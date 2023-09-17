@@ -1,5 +1,5 @@
 {
-  "name": "node-win-printer",
+  "name": "@myteril/node-win-printer",
   "version": "1.0.0",
   "type": "module",
   "description": "A small Node.js package to get the information of available printers on Windows.",

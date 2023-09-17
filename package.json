@@ -1,6 +1,6 @@
 {
   "name": "@myteril/node-win-printer",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "type": "commonjs",
   "description": "A small Node.js package to get the information of available printers on Windows.",
   "main": "index.js",

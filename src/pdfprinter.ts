@@ -1,7 +1,7 @@
 import * as fs from "node:fs";
-import {execFile} from "node:child_process";
+import {exec} from "node:child_process";
 import util from "node:util";
-const execFileAsync = util.promisify(execFile);
+const execAsync = util.promisify(exec);
 
 type PDFPrinterConfiguration = {
     /**
@@ -82,7 +82,7 @@ class PDFPrinter {
         }
     }
 
-    public async print(settings: PDFPrintingSettings){
+    public async print(settings: PDFPrintingSettings): Promise<boolean>{
 
         let printSettingsParameter: string[] = [];
 
@@ -182,12 +182,21 @@ class PDFPrinter {
 
         // endregion Printer
 
-        return await execFileAsync(this.configuration.sumatraPdfPath, [
-            `-print-to${printer === 'default' ? '-' : ' '}${printer}`,
-            `-print-settings "${printSettingsParameter.join(',')}"`,
-            '-silent',
-            JSON.stringify(settings.file)
-        ])
+        try{
+            const {stderr} = await execAsync(JSON.stringify(this.configuration.sumatraPdfPath) + " " + [
+                `-print-to${printer === 'default' ? '-' : ' '}${printer}`,
+                `-print-settings "${printSettingsParameter.join(',')}"`,
+                '-silent',
+                JSON.stringify(settings.file)
+            ].join(' '))
+
+            if(stderr.length > 0){
+                return false
+            }
+        }catch {
+            return false;
+        }
+        return true;
     }
 }
 

@@ -3,8 +3,8 @@
   "version": "1.0.6",
   "type": "commonjs",
   "description": "A small Node.js package to get the information of available printers on Windows.",
-  "main": "index.js",
   "scripts": {
+    "prepublish": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +24,14 @@
   "homepage": "https://github.com/myteril/node-win-printer#readme",
   "dependencies": {
     "iconv-lite": "^0.6.3"
-  }
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "@types/node": "^20.6.3"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ]
 }

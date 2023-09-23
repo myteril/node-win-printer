@@ -1,14 +1,11 @@
-/**
- * Attention: The system commands used in this module are available only on Windows.
- */
-
-const util = require('node:util');
-const iconv = require("iconv-lite");
-const exec = util.promisify(require('node:child_process').exec);
+import util from 'node:util';
+import iconv from "iconv-lite";
+import {exec} from "node:child_process"
+const execAsync = util.promisify(exec);
 
 
-const getCodepage = async () => {
-    const { stdout } = await exec('chcp', { encoding: 'ascii' })
+const getTerminalCodepage = async () => {
+    const { stdout } = await execAsync('chcp', { encoding: 'ascii' })
     return stdout.split(':').pop().trim()
 }
 
@@ -16,9 +13,9 @@ const getCodepage = async () => {
  * Returns the list of printers, or null if an error occurred.
  * @returns {Promise<null|Object[]>}
  */
-const getPrinters = async () => {
-    const codepage = await getCodepage();
-    const { stdout, stderr } = await exec('wmic printer list /format:list', { encoding: 'binary' })
+const getPrinters = async (): Promise<null | object[]> => {
+    const codepage = await getTerminalCodepage();
+    const { stdout, stderr } = await execAsync('wmic printer list /format:list', { encoding: 'binary' })
 
     if(stderr.length > 0){
         return null;
@@ -42,7 +39,7 @@ const getPrinters = async () => {
 
             // Extract the name and the value of the attribute.
             let attributeName = line.substring(0, equalsSignIndex)
-            let attributeValue = line.substring(equalsSignIndex + 1)
+            let attributeValue : string|boolean|number = line.substring(equalsSignIndex + 1)
 
             // Ignore attributes that have blank values for compact output.
             if(attributeValue.length < 1)
@@ -65,7 +62,7 @@ const getPrinters = async () => {
             }
 
             // Numbers
-            if(typeof attributeValue === 'string' && isFinite(attributeValue)){
+            if(typeof attributeValue === 'string' && !isNaN(parseFloat(attributeValue))){
                 attributeValue = Number(attributeValue).valueOf()
             }
 
@@ -81,6 +78,5 @@ const getPrinters = async () => {
     return printerInfos;
 }
 
-module.exports = {
-    getPrinters
-}
+
+export { getPrinters }

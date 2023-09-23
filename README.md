@@ -1,15 +1,52 @@
 # node-win-printer
 
-The Node.js package to access the information of all available printers on Windows. It uses WMIC tool to extract the information.
+The package to print PDF files and get the information of all available printers on Windows. 
 
-### Installation
+It uses [WMIC](https://learn.microsoft.com/en-us/windows/win32/wmisdk/wmic) tool to extract the detailed printer information and [Sumatra PDF](https://github.com/sumatrapdfreader/sumatrapdf) to print PDF files.
+
+## Requirements
+
+You need to install Sumatra PDF or save its portable version in a folder. After installation you can use `PDFPrinter` class by providing the path of the executable file.
+
+You can download the installer and the portable version from https://www.sumatrapdfreader.org/download-free-pdf-viewer
+
+## Installation
 
 For NPM:
 ```shell
 npm install @myteril/node-win-printer
 ```
 
-### Usage
+## Usage
+
+### Printing PDF Files
+
+```typescript
+// Import the class.
+const { PDFPrinter } = require("@myteril/node-win-printer")
+
+// Create an instance with a configuration.
+const printer = new PDFPrinter({
+    // Specify the path of the Sumatra PDF executable.
+    sumatraPdfPath: "C:\\sumatra-pdf-executable.exe"
+})
+
+// Print a PDF file. (Note: You should use the below call in an asynchronous context.)
+await printer.print({
+    // The path of the PDF file.
+    file: "C:\\pdf-file.pdf",
+    // The name of the printer.
+    printer: "Microsoft Print to PDF",
+    // Only the pages 1, 3, 5-10.
+    pages: [1, 3, {start: 5, end: 10}],
+    // The pages will be printed as monochrome.
+    color: false,
+    // The pages will be scaled so that they will fit into the printable area of the paper.
+    scale: "fit"
+})
+```
+
+### Getting Printer Information
 
 ```typescript
 // Import the function.

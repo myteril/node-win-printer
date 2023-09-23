@@ -1,10 +1,11 @@
 import util from 'node:util';
 import iconv from "iconv-lite";
 import {exec} from "node:child_process"
+import {PDFPrinter} from "./pdfprinter"
 const execAsync = util.promisify(exec);
 
 
-const getTerminalCodepage = async () => {
+const getTerminalCodepage = async () : Promise<string> => {
     const { stdout } = await execAsync('chcp', { encoding: 'ascii' })
     return stdout.split(':').pop().trim()
 }
@@ -79,4 +80,4 @@ const getPrinters = async (): Promise<null | object[]> => {
 }
 
 
-export { getPrinters }
+export { getPrinters, PDFPrinter }

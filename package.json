@@ -1,8 +1,7 @@
 {
   "name": "@myteril/node-win-printer",
-  "version": "1.0.6",
-  "type": "commonjs",
-  "description": "A small Node.js package to get the information of available printers on Windows.",
+  "version": "1.0.7",
+  "description": "A Node.js package to print PDF files and get the detailed information of available printers on Windows.",
   "scripts": {
     "prepublish": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"

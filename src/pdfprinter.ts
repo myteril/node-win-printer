@@ -65,7 +65,7 @@ type PDFPrintingSettings = {
     /**
      * The number of copies.
      */
-    numberOfCopies: number
+    numberOfCopies?: number
 }
 
 class PDFPrinter {
